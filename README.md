@@ -5,35 +5,6 @@ ICD-coded primary and secondary diagnoses, correct their records at any time, an
 data to Excel. A separate superadmin panel gives the registry administrator full control over
 every hospital account and every record.
 
-## Installation (XAMPP)
-
-1. Copy the `cancer-registry` folder into `C:\xampp\htdocs\`.
-2. Start **Apache** and **MySQL** in the XAMPP control panel.
-3. In phpMyAdmin create the `cancer_registry` database and import your existing dump.
-4. Apply the database upgrade — either open <http://localhost/cancer-registry/upgrade.php> and
-   press **Run the upgrade**, or import **`superadmin/sql/upgrade.sql`** in phpMyAdmin with
-   `cancer_registry` selected. It is safe to run more than once and it:
-   - fixes the hospital deletion error #1451 (`ON DELETE CASCADE` on `fk_patient_hospital`),
-   - adds `is_active` / `deleted_at` to `hospital_accounts` (deactivate instead of delete),
-   - adds `patient_records.updated_at` plus dashboard indexes,
-   - creates `super_admins` and `admin_activity_log`.
-5. Open <http://localhost/cancer-registry/> and sign in as a hospital, or
-   <http://localhost/cancer-registry/superadmin/login.php> as the administrator
-   (`superadmin` / `ChangeMe@123` — **change this password immediately** under *My Profile*).
-
-If your MySQL user is not `root` with an empty password, edit the four variables at the top of
-`config.php`. That one file holds the connection used by both the hospital pages and the
-superadmin panel.
-
-## Troubleshooting
-
-| Symptom | Cause and fix |
-| --- | --- |
-| `Unknown column 'p.updated_at'` or a *Database upgrade pending* banner | The upgrade has not been applied — open `upgrade.php` or import `superadmin/sql/upgrade.sql`. |
-| Deleting a hospital fails with error **#1451** | Same: the upgrade recreates `fk_patient_hospital` with `ON DELETE CASCADE`. |
-| The upgrade prints *skipped: patient_records rows point at hospitals that no longer exist* | Orphan records block the foreign key. Reassign or remove the rows whose `hospital_id` has no hospital, then run the upgrade again. |
-| The upgrade prints *skipped: duplicate hospital usernames* | Two hospitals share a username. Rename one in the superadmin panel and run the upgrade again. |
-
 ## Hospital application
 
 | Page | What it does |
