@@ -1,0 +1,144 @@
+:root {
+  --bg: #f4f6fb;
+  --panel: #ffffff;
+  --ink: #1f2937;
+  --muted: #6b7280;
+  --line: #e5e7eb;
+  --brand: #0f766e;
+  --brand-dark: #115e59;
+  --danger: #b91c1c;
+  --danger-soft: #fee2e2;
+  --warn: #b45309;
+  --warn-soft: #fef3c7;
+  --ok-soft: #dcfce7;
+  --ok: #166534;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--ink);
+  font-size: 14px;
+}
+
+a { color: var(--brand); }
+
+.layout { display: flex; min-height: 100vh; }
+
+.sidebar {
+  width: 235px;
+  flex: 0 0 235px;
+  background: #0b3b39;
+  color: #d7e7e5;
+  display: flex;
+  flex-direction: column;
+  padding: 18px 0;
+}
+
+.brand { display: flex; gap: 10px; align-items: center; padding: 0 18px 18px; }
+.brand-mark {
+  width: 38px; height: 38px; border-radius: 9px; background: var(--brand);
+  color: #fff; display: grid; place-items: center; font-weight: 700;
+}
+.brand strong { display: block; color: #fff; font-size: 15px; }
+.brand small { color: #9dc2be; }
+
+.sidebar nav { display: flex; flex-direction: column; }
+.sidebar nav a {
+  padding: 11px 18px; color: #cfe3e1; text-decoration: none; border-left: 3px solid transparent;
+}
+.sidebar nav a:hover { background: rgba(255,255,255,.06); }
+.sidebar nav a.active { background: rgba(255,255,255,.11); border-left-color: #5eead4; color: #fff; font-weight: 600; }
+.nav-count {
+  display: inline-block; min-width: 20px; margin-left: 6px; padding: 1px 6px;
+  background: #ef4444; color: #fff; border-radius: 999px; font-size: 11px;
+  font-weight: 700; text-align: center;
+}
+.topbar-user { display: flex; align-items: center; gap: 14px; }
+.topbar-user .logout {
+  padding: 7px 15px; border: 1px solid var(--line); border-radius: 7px;
+  background: var(--panel); color: #b91c1c; font-weight: 600; text-decoration: none;
+}
+.topbar-user .logout:hover { background: #fee2e2; border-color: #fca5a5; }
+
+.content { flex: 1; padding: 22px 28px 40px; min-width: 0; }
+
+.topbar { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; }
+.topbar h1 { font-size: 21px; margin: 0; }
+.who { color: var(--muted); }
+
+.cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; margin-bottom: 22px; }
+.card { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 16px; }
+.card .num { font-size: 27px; font-weight: 700; }
+.card .label { color: var(--muted); margin-top: 3px; }
+a.card { display: block; color: inherit; text-decoration: none; }
+a.card:hover { border-color: var(--brand); }
+
+.panel { background: var(--panel); border: 1px solid var(--line); border-radius: 10px; padding: 18px; margin-bottom: 20px; }
+.panel h2 { margin: 0 0 12px; font-size: 16px; }
+
+table { width: 100%; border-collapse: collapse; }
+th, td { text-align: left; padding: 9px 10px; border-bottom: 1px solid var(--line); vertical-align: middle; }
+th { background: #f8fafc; font-size: 12px; text-transform: uppercase; letter-spacing: .03em; color: var(--muted); }
+tbody tr:hover { background: #fafcff; }
+.table-wrap { overflow-x: auto; }
+
+.btn {
+  display: inline-block; padding: 7px 13px; border-radius: 7px; border: 1px solid transparent;
+  background: var(--brand); color: #fff; text-decoration: none; cursor: pointer; font-size: 13px;
+}
+.btn:hover { background: var(--brand-dark); }
+.btn-light { background: #fff; color: var(--ink); border-color: var(--line); }
+.btn-light:hover { background: #f3f4f6; }
+.btn-danger { background: var(--danger); }
+.btn-danger:hover { background: #991b1b; }
+.btn-warn { background: var(--warn); }
+.btn-sm { padding: 4px 9px; font-size: 12px; }
+
+.badge { display: inline-block; padding: 2px 9px; border-radius: 999px; font-size: 12px; }
+.badge-ok { background: var(--ok-soft); color: var(--ok); }
+.badge-off { background: #e5e7eb; color: #4b5563; }
+.badge-warn { background: var(--warn-soft); color: var(--warn); }
+
+.alert { padding: 11px 14px; border-radius: 8px; margin-bottom: 16px; }
+.alert-success { background: var(--ok-soft); color: var(--ok); }
+.alert-error { background: var(--danger-soft); color: var(--danger); }
+.alert-warning { background: var(--warn-soft); color: var(--warn); }
+/* Applied by assets/app.js just before a status message is removed. */
+.alert-fading { opacity: 0; transition: opacity .4s ease; }
+
+form .row { display: flex; flex-wrap: wrap; gap: 12px; }
+form .field { display: flex; flex-direction: column; gap: 4px; margin-bottom: 12px; flex: 1 1 220px; }
+label { font-weight: 600; font-size: 13px; }
+input[type=text], input[type=email], input[type=password], input[type=number], input[type=file], select, textarea {
+  padding: 8px 10px; border: 1px solid var(--line); border-radius: 7px; font: inherit; background: #fff; width: 100%;
+}
+.hint { color: var(--muted); font-size: 12px; }
+.actions { display: flex; gap: 8px; align-items: center; margin-top: 6px; }
+
+.filters { display: flex; flex-wrap: wrap; gap: 10px; align-items: flex-end; margin-bottom: 14px; }
+.filters .field { margin-bottom: 0; flex: 0 1 190px; }
+
+.pagination { display: flex; gap: 6px; margin-top: 14px; flex-wrap: wrap; }
+.pagination a, .pagination span { padding: 5px 10px; border: 1px solid var(--line); border-radius: 6px; text-decoration: none; background: #fff; }
+.pagination .current { background: var(--brand); color: #fff; border-color: var(--brand); }
+
+
+.message-card .message-head { display: flex; justify-content: space-between; align-items: flex-start; gap: 14px; }
+.message-card .message-head h2 { margin: 0 0 4px; }
+.message-card .hint { margin: 0; }
+.message-body { background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; margin: 14px 0; white-space: pre-wrap; }
+.message-actions { display: flex; gap: 12px; align-items: flex-end; flex-wrap: wrap; margin-bottom: 10px; }
+.message-actions .field { margin-bottom: 0; }
+.message-actions .field:first-child { flex: 1 1 320px; }
+
+.logo-upload { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.logo-preview { width: 84px; height: 84px; object-fit: contain; border: 1px solid var(--line); border-radius: 10px; padding: 8px; background: #fff; }
+
+dialog::backdrop { background: rgba(15,23,42,.45); }
+.modal { border: none; border-radius: 12px; padding: 22px; max-width: 470px; }
+.modal h3 { margin: 0 0 8px; }
+.modal ul { margin: 8px 0 14px 18px; padding: 0; }
